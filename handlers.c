@@ -20,6 +20,9 @@ void fun_pall(stack_t **stack,  unsigned int line)
 
 	(void) line;
 
+	if (cursor == NULL)
+		return;
+
 	/* if (line == 0)*/
 		/*fprintf(stderr, "L%d: unknown instruction pall\n", line);*/
 
