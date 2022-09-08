@@ -1,5 +1,5 @@
-# C - MONTY
+# C - MONTY PROJECT
 ## STACK & QEUEUS (FIFO & LIFO)
 
 ### Author :boy:
-### THAOBAN ABDRASHEED :man_technologist:
+THAOBAN ABDRASHEED :man_technologist:
