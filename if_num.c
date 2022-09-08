@@ -1,10 +1,11 @@
 #include "monty.h"
+
 /**
  * if_num - This function checks if an argument is a number
  * @arg: argument to check
- * Author: Thaoban Abdrasheed
+ * Author - Thaoban Abdrasheed
  *
- * Retutn: 1 if its num and 0 if otherwise
+ * Return: 1 if its num and 0 if otherwise
  */
 int if_num(char *arg)
 {
