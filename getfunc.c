@@ -9,7 +9,7 @@ void get_func(char *upcode, char *arg, int line)
 	{
 		if (if_num(arg) == 0)
 		{
-			fprintf(stderr,"L%d: usage: push integer", line);
+			fprintf(stderr, "L%d: usage: push integer", line);
 			exit(EXIT_FAILURE);
 		}
 		num = atoi(arg);

@@ -1,11 +1,19 @@
 #include "monty.h"
 
+/**
+ * create_stack - This function creates new stack
+ * @data: data to allocate to the new stack
+ * Author - Abdrasheed Thaoban
+ *
+ * Return: the newly created stack
+ */
 stack_t *create_stack(int data)
 {
 	stack_t *new = malloc(sizeof(stack_t));
+
 	if (new == NULL)
 	{
-		fprintf(stderr,"Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -16,6 +24,15 @@ return (new);
 }
 
 
+
+
+/**
+ * free_stack_t - The function frees a particular stack
+ * @item: pointer to stack to free
+ * Author - Thaoban Abdrasheed
+ *
+ * Return: nothing to return
+ */
 void free_stack_t(stack_t *item)
 {
 	item->next = NULL;
@@ -23,6 +40,19 @@ void free_stack_t(stack_t *item)
 	free(item);
 }
 
+
+
+
+
+
+/**
+ * push - This function add a new stack
+ * @stack: The pointer to the stack address
+ * @data: The data to allocate to the new stack
+ * Author - Abdrasheed Thaoban
+ *
+ * Return: pointer to the new stack
+ */
 stack_t *push(stack_t **stack, int data)
 {
 	stack_t *added_stack = create_stack(data);
@@ -41,6 +71,15 @@ return (added_stack);
 
 
 
+
+
+/**
+ * pop - This function pops out the last stack
+ * @stack: pointer to the address of the stack
+ * Author - Thaoban Abdrasheed
+ *
+ * Return: address of the popped out stack
+ */
 stack_t *pop(stack_t **stack)
 {
 	stack_t *top_stack = *stack;
@@ -57,6 +96,17 @@ return (top_stack);
 
 
 
+
+
+
+
+/**
+ * free_stack - This function frees a whole stack
+ * @stack: pointer to the stack
+ * Author - Abdrasheed Thaoban
+ *
+ * Return: nothing to return
+ */
 void free_stack(stack_t **stack)
 {
 	stack_t *to_free = NULL;
@@ -68,45 +118,4 @@ void free_stack(stack_t **stack)
 		free(to_free);
 	}
 
-}
-
-
-void fun_pall(stack_t **stack, int line)
-{
-	stack_t *cursor = *stack;
-	if (line < 0)
-		fprintf(stderr, "L%d: unknown instruction pall\n",line);
-
-	while(cursor)
-	{
-		printf("%d\n",cursor->n);
-		cursor = cursor->next;
-	}
-}
-
-
-void fun_pint(stack_t **stack, int line)
-{
-	if ((*stack) == NULL)
-	{
-		fprintf(stderr,"L%d: can't pint, stack empty\n", line);
-		exit(EXIT_FAILURE);
-	}
-	printf("%d\n", (*stack)->n);
-}
-
-void fun_pop(stack_t **stack, int line)
-{
-	stack_t *last = pop(stack);
-
-	if (last == NULL)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line);
-		exit(EXIT_FAILURE);
-	}
-	free_stack_t(last);
-}
-void fun_push(stack_t **stack, int arg)
-{
-	push(stack, arg);
 }

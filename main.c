@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	ssize_t line_read;
 	char *upcode = NULL;
 	char *arg = NULL;
-	int line_num = 0;
+	unsigned int line_num = 0;
 	int num = 0;
 	stack_t *buff = NULL;
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	file_ptr = fopen(argv[1], "r");
 	if (file_ptr == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while ((line_read = getline(&buffer, &count, file_ptr)) != -1)
@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
 			}
 			num = atoi(arg);
 			fun_push(&buff, num);
+			continue;
 		}
 
 		if (strcmp(upcode, "pall") == 0)
@@ -64,8 +65,15 @@ int main(int argc, char *argv[])
 
 		else if (strcmp(upcode, "pop") == 0)
 			fun_pop(&buff, line_num);
-	}
+		else
+		{
+			free_stack(&buff);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, upcode);
+			exit(EXIT_FAILURE);
+		}
 
+	}
+	free_stack(&buff);
 	fclose(file_ptr);
 return (0);
 }

@@ -1,6 +1,12 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
+#include <string.h>
+#include <unistd.h>
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -24,10 +30,10 @@ stack_t *push(stack_t **stack, int data);
 stack_t *pop(stack_t **stack);
 void free_stack_t(stack_t *item);
 void free_stack(stack_t **stack);
-void fun_push(stack_t **stack, int arg);
-void fun_pall(stack_t **stack, int line);
-void fun_pint(stack_t **stack, int line);
-void fun_pop(stack_t **stack, int line);
+void fun_push(stack_t **stack, unsigned int arg);
+void fun_pall(stack_t **stack, unsigned int line);
+void fun_pint(stack_t **stack, unsigned int line);
+void fun_pop(stack_t **stack, unsigned int line);
 
 /**
  * struct instruction_s - opcode and its function
@@ -43,11 +49,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#include <string.h>
-#include <unistd.h>
-#define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
 
  /* void get_func(char *upcode,char *arg, int line); */
 int if_num(char *arg);
