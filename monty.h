@@ -52,6 +52,14 @@ typedef struct instruction_s
 
  /* void get_func(char *upcode,char *arg, int line); */
 int if_num(char *arg);
+size_t getline(char **lineptr, size_t *n, FILE *stream);
+
+
+void arg_err();
+void open_err(char *arg);
+void push_err(unsigned int line);
+void else_err(unsigned int line, char *upcode);
+
 
 
 #endif /* MONTY_H */
