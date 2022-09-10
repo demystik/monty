@@ -26,4 +26,5 @@ void fun_queue(stack_t **stack, unsigned int line)
 	mov->prev = NULL;
 	mov1 = mov;
 	mo1 = mov1->prev;
+	mov1->prev = (*stack)->next;
 }
