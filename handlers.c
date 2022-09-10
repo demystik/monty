@@ -78,9 +78,36 @@ void fun_pop(stack_t **stack, unsigned int line)
 	free_stack_t(last);
 }
 
+/**
+ * fun_swap - This function swaps two element of the stack
+ * @stack: pointer to the head stack
+ * @line: current executing line
+ * Author - Thaoban Abdrasheed
+ *
+ * Return: void
+ */
+void fun_swap(stack_t **stack, unsigned int line)
+{
+	stack_t *swp = *stack;
+	stack_t *hold = *stack;
 
-
-
+	swp = (*stack)->next;
+	if (swp == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	hold = malloc(sizeof(stack_t));
+	if (hold == NULL)
+	{
+		free_stack_t(hold);
+		exit(EXIT_FAILURE);
+	}
+	hold->n = (*stack)->n;
+	(*stack)->n = swp->n;
+	swp->n = hold->n;
+	free_stack_t(hold);
+}
 
 /**
  * fun_push - handler for push function

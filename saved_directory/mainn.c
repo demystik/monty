@@ -17,21 +17,14 @@ int main(int argc, char *argv[])
 	size_t count;
 	ssize_t line_read;
 	char *upcode = NULL, *arg = NULL, *buffer = NULL;
-	unsigned int line_num = 0, num = 0;
+	unsigned int line_num = 0;
 	stack_t *buff = NULL;
-	void (*up_code_handler)(stack_t **stack, unsigned int arg);
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		arg_err();
 	file_ptr = fopen(argv[1], "r");
 	if (file_ptr == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+		open_err(argv[1]);
 	while ((line_read = getline(&buffer, &count, file_ptr)) != -1)
 	{
 		line_num += 1;
@@ -40,28 +33,22 @@ int main(int argc, char *argv[])
 		arg = strtok(NULL, " ");
 		if (upcode == NULL)
 			continue;
-		if (strcmp(upcode, "#") == 0)
-			continue;
 		if (strcmp(upcode, "push") == 0)
 		{
 			if (if_num(arg) == 0)
-			{
-				fprintf(stderr, "L%d: usage: push integer", line_num);
-				exit(EXIT_FAILURE);
-			}
-			num = atoi(arg);
-			fun_push(&buff, num);
+				push_err(line_num);
+			fun_push(&buff, atoi(arg));
 			continue;
 		}
-		up_code_handler = select_opcode_handler(upcode);
-		if (up_code_handler)
-			up_code_handler(&buff, line_num);
+		if (strcmp(upcode, "pall") == 0)
+			fun_pall(&buff, line_num);
+		else if (strcmp(upcode, "pint") == 0)
+			fun_pint(&buff, line_num);
+		else if (strcmp(upcode, "pop") == 0)
+			fun_pop(&buff, line_num);
 		else
-		{
-			free_stack(&buff);
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, upcode);
-			exit(EXIT_FAILURE);
-		}
+			else_err(line_num, upcode);
+		free_stack(&buff);
 	}
 	free_stack(&buff);
 	fclose(file_ptr);

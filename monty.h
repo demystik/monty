@@ -34,6 +34,22 @@ void fun_push(stack_t **stack, unsigned int arg);
 void fun_pall(stack_t **stack, unsigned int line);
 void fun_pint(stack_t **stack, unsigned int line);
 void fun_pop(stack_t **stack, unsigned int line);
+void fun_swap(stack_t **stack, unsigned int line);
+void fun_add(stack_t **stack, unsigned int line);
+void fun_nop(stack_t **stack, unsigned int line);
+void fun_sub(stack_t **stack, unsigned int line);
+void fun_div(stack_t **stack, unsigned int line);
+void fun_mul(stack_t **stack, unsigned int line);
+void fun_mod(stack_t **stack, unsigned int line);
+void fun_pchar(stack_t **stack, unsigned int line);
+void fun_pstr(stack_t **stack, unsigned int line);
+void fun_rotl(stack_t **stack, unsigned int line);
+void fun_rotr(stack_t **stack, unsigned int line);
+void fun_queue(stack_t **stack, unsigned int line);
+
+/* up_code handlers */
+void (*select_opcode_handler(char *upcode))(stack_t **, unsigned int);
+
 
 /**
  * struct instruction_s - opcode and its function
@@ -54,11 +70,6 @@ typedef struct instruction_s
 int if_num(char *arg);
 size_t getline(char **lineptr, size_t *n, FILE *stream);
 
-
-void arg_err();
-void open_err(char *arg);
-void push_err(unsigned int line);
-void else_err(unsigned int line, char *upcode);
 
 
 
